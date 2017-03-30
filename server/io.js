@@ -1,7 +1,6 @@
 module.exports = function (io) {
   io.sockets.on('connection', (socket) => {
     socket.on('set nickname', (name) => {
-      socket.nickname = name;
       socket.broadcast.emit('new user', {
         nickname: name,
         type: 'user',
@@ -19,4 +18,4 @@ module.exports = function (io) {
       });
     });
   });
-}
+};

@@ -12,6 +12,19 @@
 <script>
   export default {
     name: 'login',
+    created() {
+      this.$http.get('/api/test').then((response) => {
+        // get body data
+        console.log(response);
+      }, () => {
+        // error callback
+      });
+    },
+    sockets: {
+      connection() {
+        console.log('socket connected');
+      },
+    },
   };
 
 </script>
