@@ -1,7 +1,11 @@
 module.exports = function (io) {
   io.sockets.on('connection', (socket) => {
-    socket.on('set nickname', (name) => {
-      socket.broadcast.emit('new user', {
+    socket.emit('TEST', {
+      id: socket.id,
+    });
+    socket.on('test', (name) => {
+      console.log(12311111);
+      socket.broadcast.emit('newuser', {
         nickname: name,
         type: 'user',
       });
@@ -10,8 +14,9 @@ module.exports = function (io) {
         id: socket.id,
       });
     });
-    socket.on('new dialog', (str) => {
-      io.emit('new dialog', {
+    socket.on('newdialog', (str) => {
+      console.log(1232);
+      io.emit('newdialog', {
         value: str,
         nickname: socket.nickname,
         type: 'dialog',

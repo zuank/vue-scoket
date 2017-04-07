@@ -15,7 +15,7 @@ import components from './component';
 Object.keys(components).forEach((key) => {
   Vue.component(`z-${key}`, components[key]);
 });
-Vue.use(VueSocketio, socketio('http://localhost:3000/'), store);
+Vue.use(VueSocketio, socketio('http://172.16.30.203:3000/'), store);
 Vue.config.productionTip = false;
 sync(store, router);
 Vue.use(resource);

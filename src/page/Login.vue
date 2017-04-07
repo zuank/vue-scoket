@@ -2,9 +2,9 @@
   <z-card>
     <p slot='title'>LOGIN</p>
     <div slot='body' class="form">
-      <p><span>账户名：</span><input type="text"></p>
-      <p><span>密码：</span><input type="password"></p>
-      <p><button class="login">登录</button><button class="reg">注册</button></p>
+      <p><span>账户名：</span><input type="text" v-model="userName"></p>
+      <p><span>密码：</span><input type="password" v-model="password"></p>
+      <p><button class="login" @click = 'login'>登录</button><button class="reg" @click = 'reg'>注册</button></p>
     </div>
   </z-card>
 </template>
@@ -12,19 +12,34 @@
 <script>
   export default {
     name: 'login',
+    data() {
+      return {
+        userName:'',
+        password:''
+      }
+    },
+    // sockets () {
+
+    // },
     created() {
-      this.$http.get('/api/test').then((response) => {
-        // get body data
-        console.log(response);
-      }, () => {
-        // error callback
-      });
+      this.$socket.emit('test', '123');
+      console.log(this.$options.sockets)
+      // this.$store.dispatch('socket_test',{name:123})
     },
-    sockets: {
-      connection() {
-        console.log('socket connected');
+    methods: {
+      reg () {
+        this.$store.dispatch('userReg',{
+          userName:this.userName,
+          password:this.password
+        })
       },
-    },
+      login () {
+        this.$store.dispatch('userLogin',{
+          userName:this.userName,
+          password:this.password
+        })
+      }
+    }
   };
 
 </script>
