@@ -6,9 +6,12 @@ module.exports = function (app) {
         if (err) {
           return;
         }
-        collection.insert(req.body, () => {
+        collection.insert(req.body, (err, result) => {
           mongodb.close();
-          res.status(200).json({ userName: req.body.userName });
+          res.status(200).json({
+            userName: req.body.userName,
+            userId: result.ops[0]._id,
+          });
         });
       });
     });
