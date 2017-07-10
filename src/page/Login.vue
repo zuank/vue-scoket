@@ -23,12 +23,16 @@
         password: '',
       };
     },
-    // sockets() {
-    //
-    // },
+    sockets: {
+      connect() {
+        console.log('socket connected');
+      },
+      login(value) {
+        console.log(value);
+      },
+    },
     created() {
-      // this.$socket.emit('test', '123');
-      // this.$store.dispatch('socket_test',{name:123})
+      this.$socket.emit('test', '123');
     },
     methods: {
       reg() {

@@ -1,6 +1,4 @@
-import Vue from 'vue';
-
-const vm = new Vue();
+import vm from '@/main.js'
 
 export function userReg({
   commit,
@@ -16,9 +14,16 @@ export function userLogin({
     commit,
     dispatch,
 }, info) {
-  vm.$http.post('/api/login', JSON.stringify(info)).then(() => {
-
+  vm.$http.post('/api/login', JSON.stringify(info)).then((response) => {
+    if (response.body.status === 0) {
+      commit('GET_USER_INFO', response.body);
+      vm.$router.push('/info')
+    }
   }, () => {
 
   });
+}
+
+export function socket_login(context, value) {
+  console.log(111121);
 }

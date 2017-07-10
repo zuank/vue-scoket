@@ -1,15 +1,25 @@
 const express = require('express');
-// const httpProxy = require('http-proxy');
+const http = require('http');
+const httpProxy = require('http-proxy');
 const configIO = require('./io');
 const api = require('./api');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const settings = require('./settings');
-// const path = require('path');
+const path = require('path');
 
 const app = express();
-
+// 配置反向代理 用于开发环境
+const proxy = httpProxy.createProxyServer();
+const proxyServer = http.createServer((req, res) => {
+  proxy.web(req, res, {
+    target: 'http://localhost:8888',
+  });
+});
+proxyServer.listen(8088, () => {
+  console.log('proxy server is running ');
+});
 app.use(session({
   resave: false,
   saveUninitialized: true,
@@ -29,10 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 3000;
 
-// app.use(express.static(path.join(__dirname, '../dist')));
-// app.use((req, res) => {
-//   res.sendFile(path.join(__dirname, '../dist/index.html'));
-// });
+app.use(express.static(path.join(__dirname, '../dist')));
 
 const server = app.listen(port);
 

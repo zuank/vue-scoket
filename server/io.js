@@ -15,7 +15,7 @@ module.exports = function (io) {
       });
     });
     socket.on('newdialog', (str) => {
-      console.log(1232);
+      console.log('newdialog：' + str);
       io.emit('newdialog', {
         value: str,
         nickname: socket.nickname,
