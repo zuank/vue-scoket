@@ -68,7 +68,7 @@ module.exports = (app) => {
       });
     });
   });
-  app.get('/api/logout',(req.res) => {
+  app.get('/api/logout',(req, res) => {
     req.session.userName = null
   })
 };
