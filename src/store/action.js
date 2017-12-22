@@ -1,4 +1,4 @@
-import vm from '@/main.js'
+import vm from '@/main';
 
 export function userReg({
   commit,
@@ -17,7 +17,7 @@ export function userLogin({
   vm.$http.post('/api/login', JSON.stringify(info)).then((response) => {
     if (response.body.status === 0) {
       commit('GET_USER_INFO', response.body);
-      vm.$router.push('/info')
+      vm.$router.push('/info');
     }
   }, () => {
 

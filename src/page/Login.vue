@@ -31,6 +31,15 @@
         console.log(value);
       },
     },
+    watch: {
+      function() {
+        return this.userName + this.password;
+      },
+      function(newVal, oldVal) {
+       // 做点什么
+        console.log(newVal, oldVal);
+      },
+    },
     created() {
       this.$socket.emit('test', '123');
     },
